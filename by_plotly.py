@@ -1,9 +1,5 @@
-import os
-import shutil
 import plotly.graph_objs as go
-from plotly.offline import plot
 import datetime
-from time import sleep
 from excel_reader import *
 
 
@@ -19,9 +15,6 @@ def simple_ptl():
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=period, y=norm_nums, mode='lines'))
     fig.add_trace(go.Scatter(x=period, y=stat, mode='lines'))
-    plot(fig, image='png')
+    fig.write_image('simple_plots/simple_mpl.png')
     t_ptl2 = datetime.datetime.now()
-    sleep(3)
-    shutil.move('C:/Users/Hazar/Downloads/plot_image.png',
-                'C:/Users/Hazar/Desktop/Python/Dplm/simple_plots/simple_plt.png')
     print(f'Plotly: {t_ptl2 - t_ptl1}')
