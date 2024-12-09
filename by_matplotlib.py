@@ -16,4 +16,4 @@ def simple_mpl():
     plt.plot(period, norm_nums)
     plt.savefig('simple_plots/simple_mpl.png')
     t_mpl2 = datetime.datetime.now()
-    print(f'Matlpotlib: {t_mpl2 - t_mpl1}')
+    print(f'Matplotlib: {t_mpl2 - t_mpl1}')
