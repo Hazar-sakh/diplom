@@ -24,6 +24,13 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1126, 900)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
+        MainWindow.setSizePolicy(sizePolicy)
+        MainWindow.setMinimumSize(QSize(1126, 900))
+        MainWindow.setMaximumSize(QSize(1126, 900))
         icon = QIcon()
         icon.addFile(u"icons8-graph-100.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         MainWindow.setWindowIcon(icon)
@@ -33,7 +40,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.browse_label = QLabel(self.centralwidget)
         self.browse_label.setObjectName(u"browse_label")
-        self.browse_label.setGeometry(QRect(320, 49, 371, 31))
+        self.browse_label.setGeometry(QRect(160, 40, 691, 31))
         self.browse_label.setStyleSheet(u"background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 150));\n"
 "color: rgb(255, 255, 255);\n"
 "border-radius:7")
@@ -43,7 +50,7 @@ class Ui_MainWindow(object):
         self.browse_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.browse = QPushButton(self.centralwidget)
         self.browse.setObjectName(u"browse")
-        self.browse.setGeometry(QRect(700, 50, 121, 31))
+        self.browse.setGeometry(QRect(860, 40, 121, 31))
         self.browse.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.browse.setStyleSheet(u"QPushButton {background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
 "color: rgb(255, 255, 255);\n"
@@ -71,25 +78,28 @@ class Ui_MainWindow(object):
         self.select_type.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.select_type.setContextMenuPolicy(Qt.ContextMenuPolicy.DefaultContextMenu)
         self.select_type.setToolTipDuration(-1)
-        self.select_type.setStyleSheet(u"QComboBox {background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
+        self.select_type.setStyleSheet(u"QComboBox {\n"
+"background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
 "color: rgb(255, 255, 255);\n"
 "border-radius:7\n"
 "}\n"
 "\n"
-"QComboBox:hover {\n"
-"background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 100), stop:1 rgba(0, 0, 71, 100));\n"
+"QComboBox QAbstractItemView {\n"
+"background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 10), stop:1 rgba(0, 0, 71, 10));\n"
+"selection-background-color: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 10), stop:1 rgba(0, 0, 71, 10));\n"
 "color: rgb(255, 255, 255);\n"
 "border-radius:7\n"
 "}\n"
 "\n"
-"QComboBox:pressed {\n"
-"background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 255), stop:1 rgba(0, 0, 71, 255));\n"
+"QScrollBar:vertical {\n"
+"background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
 "color: rgb(255, 255, 255);\n"
-"border-radius:7\n"
 "}\n"
+"\n"
 "\n"
 "")
-        self.select_type.setEditable(True)
+        self.select_type.setEditable(False)
+        self.select_type.setDuplicatesEnabled(False)
         self.select_type.setFrame(True)
         self.mpl_gra_h = QGraphicsView(self.centralwidget)
         self.mpl_gra_h.setObjectName(u"mpl_gra_h")

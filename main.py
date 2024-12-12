@@ -10,11 +10,11 @@
 
 import sys
 
-import PySide6.QtCore
+
 import pandas as pd
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
-from PySide6.QtCore import Qt
 from ui_main import Ui_MainWindow
+from by_matplotlib import simple_mpl
 
 class Vis(QMainWindow):
     def __init__(self):
@@ -45,7 +45,11 @@ class Vis(QMainWindow):
             names = df_mp[df_mp.columns[0]].tolist()
             self.ui.select_type.addItems([f'{names.index(i) + 1}. {i}' for i in names])
 
-            point = 0
+            # point = 0
+            pt = self.ui.select_type.textActivated()
+            print(pt)
+            point = names.index(pt)
+            print(point)
             name = names[point]
 
             # Получаем список значений для представления по имени и норму
@@ -57,7 +61,7 @@ class Vis(QMainWindow):
             zip_l = list(zip(norm_nums, stat, period))
             data_l = [list(i) for i in zip_l]
             df = pd.DataFrame(data_l, columns=[norm_name, 'Факт', 'Год'])
-            print(f'\n\n\n{name}\n{period}\n{stat}\n\n')
+            # print(f'\n\n\n{name}\n{period}\n{stat}\n\n')
         except:
             print('Неверные импортируемые данные, проверьте таблицу на соответствие требованиям к форме')
 
