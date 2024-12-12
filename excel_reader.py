@@ -27,7 +27,7 @@ try:
     names = df_mp[df_mp.columns[0]].tolist()
     for i in names:
         print(f'{names.index(i)+1}. {i}')
-    point = int(input('Введите номер пункта для визуализации:> '))-1
+    point = 0
     name = names[point]
 
     # Получаем список значений для представления по имени и норму

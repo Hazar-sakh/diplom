@@ -1,3 +1,4 @@
+import os.path
 import matplotlib.pyplot as plt
 import datetime
 
@@ -9,10 +10,13 @@ import datetime
 
 
 # Строим простейшую таблицу
-def simple_mpl(period, stat, norm_nums):
+def simple_mpl(period, norm_nums, stat):
     t_mpl1 = datetime.datetime.now()
+    if os.path.exists('simple_plots/simple_mpl.png'):
+        plt.clf()
+        plt.close()
     plt.plot(period, stat)
     plt.plot(period, norm_nums)
     plt.savefig('simple_plots/simple_mpl.png')
     t_mpl2 = datetime.datetime.now()
-    print(f'Matplotlib: {t_mpl2 - t_mpl1}')
+    return f'{t_mpl2 - t_mpl1}'

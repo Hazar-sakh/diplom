@@ -1,6 +1,7 @@
+import os
 import seaborn as sns
+import matplotlib.pyplot as plt
 import datetime
-from excel_reader import *
 
 # period - период для представления
 # norm_name - название нормы
@@ -10,9 +11,12 @@ from excel_reader import *
 
 
 # Строим простейшую таблицу
-def simple_sns():
+def simple_sns(df):
     t_s1 = datetime.datetime.now()
+    if os.path.exists('simple_plots/simple_mpl.png'):
+        plt.clf()
+        plt.close()
     splt = sns.relplot(data=df, kind='line')
     splt.savefig('simple_plots/simple_sns.png')
     t_s2 = datetime.datetime.now()
-    print(f'Seaborn: {t_s2 - t_s1}')
+    return f'{t_s2 - t_s1}'

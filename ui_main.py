@@ -15,9 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGraphicsView,
-    QLabel, QMainWindow, QPushButton, QSizePolicy,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QLabel,
+    QMainWindow, QPushButton, QSizePolicy, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -52,13 +51,13 @@ class Ui_MainWindow(object):
         self.browse.setObjectName(u"browse")
         self.browse.setGeometry(QRect(860, 40, 121, 31))
         self.browse.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-        self.browse.setStyleSheet(u"QPushButton {background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
+        self.browse.setStyleSheet(u"QPushButton {background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 150));\n"
 "color: rgb(255, 255, 255);\n"
 "border-radius:7\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 100), stop:1 rgba(0, 0, 71, 100));\n"
+"background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 200));\n"
 "color: rgb(255, 255, 255);\n"
 "border-radius:7\n"
 "}\n"
@@ -79,7 +78,7 @@ class Ui_MainWindow(object):
         self.select_type.setContextMenuPolicy(Qt.ContextMenuPolicy.DefaultContextMenu)
         self.select_type.setToolTipDuration(-1)
         self.select_type.setStyleSheet(u"QComboBox {\n"
-"background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
+"background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 150));\n"
 "color: rgb(255, 255, 255);\n"
 "border-radius:7\n"
 "}\n"
@@ -101,41 +100,6 @@ class Ui_MainWindow(object):
         self.select_type.setEditable(False)
         self.select_type.setDuplicatesEnabled(False)
         self.select_type.setFrame(True)
-        self.mpl_gra_h = QGraphicsView(self.centralwidget)
-        self.mpl_gra_h.setObjectName(u"mpl_gra_h")
-        self.mpl_gra_h.setGeometry(QRect(20, 580, 351, 271))
-        self.mpl_gra_h.setStyleSheet(u"background:qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
-"border-radius:7")
-        self.mpl_gra_h.setFrameShape(QFrame.Shape.StyledPanel)
-        self.mpl_gra_h.setFrameShadow(QFrame.Shadow.Sunken)
-        self.mpl_gra_h.setLineWidth(0)
-        self.mpl_gra_h.setMidLineWidth(0)
-        self.mpl_gra_h.setInteractive(True)
-        self.ptl_gra_h = QGraphicsView(self.centralwidget)
-        self.ptl_gra_h.setObjectName(u"ptl_gra_h")
-        self.ptl_gra_h.setGeometry(QRect(760, 580, 351, 271))
-        self.ptl_gra_h.setStyleSheet(u"background:qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
-"border-radius:7")
-        self.sns_gra_h = QGraphicsView(self.centralwidget)
-        self.sns_gra_h.setObjectName(u"sns_gra_h")
-        self.sns_gra_h.setGeometry(QRect(390, 580, 351, 271))
-        self.sns_gra_h.setStyleSheet(u"background:qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
-"border-radius:7")
-        self.mpl_gra_s = QGraphicsView(self.centralwidget)
-        self.mpl_gra_s.setObjectName(u"mpl_gra_s")
-        self.mpl_gra_s.setGeometry(QRect(20, 270, 351, 271))
-        self.mpl_gra_s.setStyleSheet(u"background:qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
-"border-radius:7")
-        self.sns_gra_s = QGraphicsView(self.centralwidget)
-        self.sns_gra_s.setObjectName(u"sns_gra_s")
-        self.sns_gra_s.setGeometry(QRect(390, 270, 351, 271))
-        self.sns_gra_s.setStyleSheet(u"background:qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
-"border-radius:7")
-        self.ptl_gra_s = QGraphicsView(self.centralwidget)
-        self.ptl_gra_s.setObjectName(u"ptl_gra_s")
-        self.ptl_gra_s.setGeometry(QRect(760, 270, 351, 271))
-        self.ptl_gra_s.setStyleSheet(u"background:qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
-"border-radius:7")
         self.t_mpl_s = QLabel(self.centralwidget)
         self.t_mpl_s.setObjectName(u"t_mpl_s")
         self.t_mpl_s.setGeometry(QRect(110, 550, 161, 16))
@@ -178,6 +142,66 @@ class Ui_MainWindow(object):
 "color:rgb(255, 255, 255);\n"
 "border-radius:7")
         self.t_ptl_h.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.mpl_g_s = QLabel(self.centralwidget)
+        self.mpl_g_s.setObjectName(u"mpl_g_s")
+        self.mpl_g_s.setGeometry(QRect(20, 270, 351, 271))
+        self.mpl_g_s.setStyleSheet(u"background:qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
+"border-radius:7")
+        self.mpl_g_s.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.sns_g_s = QLabel(self.centralwidget)
+        self.sns_g_s.setObjectName(u"sns_g_s")
+        self.sns_g_s.setGeometry(QRect(390, 270, 351, 271))
+        self.sns_g_s.setStyleSheet(u"background:qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
+"border-radius:7")
+        self.sns_g_s.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.ptl_g_s = QLabel(self.centralwidget)
+        self.ptl_g_s.setObjectName(u"ptl_g_s")
+        self.ptl_g_s.setGeometry(QRect(760, 270, 351, 271))
+        self.ptl_g_s.setStyleSheet(u"background:qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
+"border-radius:7")
+        self.ptl_g_s.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.mpl_g_h = QLabel(self.centralwidget)
+        self.mpl_g_h.setObjectName(u"mpl_g_h")
+        self.mpl_g_h.setGeometry(QRect(20, 580, 351, 271))
+        self.mpl_g_h.setStyleSheet(u"background:qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
+"border-radius:7")
+        self.mpl_g_h.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.sns_g_h = QLabel(self.centralwidget)
+        self.sns_g_h.setObjectName(u"sns_g_h")
+        self.sns_g_h.setGeometry(QRect(390, 580, 351, 271))
+        self.sns_g_h.setStyleSheet(u"background:qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
+"border-radius:7")
+        self.sns_g_h.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.ptl_g_h = QLabel(self.centralwidget)
+        self.ptl_g_h.setObjectName(u"ptl_g_h")
+        self.ptl_g_h.setGeometry(QRect(760, 580, 351, 271))
+        self.ptl_g_h.setStyleSheet(u"background:qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
+"border-radius:7")
+        self.ptl_g_h.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label = QLabel(self.centralwidget)
+        self.label.setObjectName(u"label")
+        self.label.setGeometry(QRect(90, 220, 211, 41))
+        self.label.setStyleSheet(u"background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
+"color: rgb(255, 255, 255);\n"
+"border-radius:7;\n"
+"font: 16pt \"Franklin Gothic\";")
+        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_2 = QLabel(self.centralwidget)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setGeometry(QRect(460, 220, 211, 41))
+        self.label_2.setStyleSheet(u"background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
+"color: rgb(255, 255, 255);\n"
+"border-radius:7;\n"
+"font: 16pt \"Franklin Gothic\";")
+        self.label_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_3 = QLabel(self.centralwidget)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setGeometry(QRect(830, 220, 211, 41))
+        self.label_3.setStyleSheet(u"background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));\n"
+"color: rgb(255, 255, 255);\n"
+"border-radius:7;\n"
+"font: 16pt \"Franklin Gothic\";")
+        self.label_3.setAlignment(Qt.AlignmentFlag.AlignCenter)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -203,5 +227,14 @@ class Ui_MainWindow(object):
         self.t_sns_h.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0430\u0439\u043c\u0438\u043d\u0433", None))
         self.t_ptl_s.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0430\u0439\u043c\u0438\u043d\u0433", None))
         self.t_ptl_h.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0430\u0439\u043c\u0438\u043d\u0433", None))
+        self.mpl_g_s.setText("")
+        self.sns_g_s.setText("")
+        self.ptl_g_s.setText("")
+        self.mpl_g_h.setText("")
+        self.sns_g_h.setText("")
+        self.ptl_g_h.setText("")
+        self.label.setText(QCoreApplication.translate("MainWindow", u"MatPlotLib", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Seaborn", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Plotly", None))
     # retranslateUi
 
