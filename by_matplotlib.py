@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import datetime
-from excel_reader import *
 
 # period - период для представления
 # norm_name - название нормы
@@ -10,7 +9,7 @@ from excel_reader import *
 
 
 # Строим простейшую таблицу
-def simple_mpl():
+def simple_mpl(period, stat, norm_nums):
     t_mpl1 = datetime.datetime.now()
     plt.plot(period, stat)
     plt.plot(period, norm_nums)
