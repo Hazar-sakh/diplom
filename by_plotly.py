@@ -1,7 +1,7 @@
 import os
 import plotly.graph_objs as go
 import datetime
-from excel_reader import *
+# from excel_reader import *
 
 
 # period - период для представления
@@ -11,16 +11,16 @@ from excel_reader import *
 # stat - статистика объекта представления
 
 
-def simple_ptl():
+def simple_ptl(period, norm_nums, stat):
     t_ptl1 = datetime.datetime.now()
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=period, y=norm_nums, mode='lines'))
     fig.add_trace(go.Scatter(x=period, y=stat, mode='lines'))
-    if not os.path.exists('simple_plots/simple_mpl.png'):
+    if not os.path.exists('simple_plots/simple_plt.png'):
         os.mkdir('simple_plots/')
-    fig.write_image('simple_plots/simple_mpl.png')
+    else:
+        os.remove('simple_plots/simple_plt.png')
+    name = 'simple_plt'
+    fig.write_image(f'simple_plots/{name}.png')
     t_ptl2 = datetime.datetime.now()
-    print(f'{t_ptl2 - t_ptl1}')
-
-
-simple_ptl()
+    return f'{t_ptl2 - t_ptl1}'
