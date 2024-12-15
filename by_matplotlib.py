@@ -9,7 +9,7 @@ import datetime
 # stat - статистика объекта представления
 
 
-# Строим простейшую таблицу
+# Строим простейший график
 def simple_mpl(period, norm_nums, stat):
     t_mpl1 = datetime.datetime.now()
     if os.path.exists('simple_plots/simple_mpl.png'):
@@ -21,22 +21,14 @@ def simple_mpl(period, norm_nums, stat):
     t_mpl2 = datetime.datetime.now()
     return f'{t_mpl2 - t_mpl1}'
 
-# Строим усложненную таблицу
+# Строим усложненный график
 def hard_mpl(period, statH):
-    row = []
+    t_mpl1 = datetime.datetime.now()
+    if os.path.exists('complicated_plots/compl_mpl.png'):
+        plt.clf()
+        plt.close()
     for i in statH:
-        print(i)
-        m = [int(j) for j in i if i.index(j) > 1]
-        print(m)
-
-
-
-    # t_mpl1 = datetime.datetime.now()
-    # if os.path.exists('simple_plots/simple_mpl.png'):
-    #     plt.clf()
-    #     plt.close()
-    # plt.plot(period, stat)
-    # plt.plot(period, norm_nums)
-    # plt.savefig('simple_plots/simple_mpl.png')
-    # t_mpl2 = datetime.datetime.now()
-    # return f'{t_mpl2 - t_mpl1}'
+        plt.plot(period, i)
+    plt.savefig('complicated_plots/compl_mpl.png')
+    t_mpl2 = datetime.datetime.now()
+    return f'{t_mpl2 - t_mpl1}'
