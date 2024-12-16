@@ -22,12 +22,12 @@ def simple_sns(df):
     return f'{t_s2 - t_s1}'
 
 # Строим усложненный график
-def hard_sns(df_sns_H):
+def hard_sns(df_sns_h):
     t_s1 = datetime.datetime.now()
     if os.path.exists('complicated_plots/compl_sns.png'):
         plt.clf()
         plt.close()
-    splt = sns.relplot(data=df_sns_H, kind='line')
+    splt = sns.relplot(data=df_sns_h, kind='line')
     splt.savefig('complicated_plots/compl_sns.png')
     t_s2 = datetime.datetime.now()
     return f'{t_s2 - t_s1}'

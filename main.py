@@ -1,6 +1,6 @@
 from by_matplotlib import simple_mpl, hard_mpl
 from by_seaborn import simple_sns, hard_sns
-from by_plotly import simple_ptl
+from by_plotly import simple_ptl, hard_ptl
 
 
 import sys
@@ -20,7 +20,7 @@ class Vis(QMainWindow):
 
     def browse_(self):
         # Объявление глобальных переменных и диалоговое окно выбора таблицы
-        global period, norm_name, names, df_mp, statH, df_sns_H
+        global period, norm_name, names, df_mp, stat_h, df_sns_h
         file = QFileDialog.getOpenFileName(self, caption='Открыть таблицу', filter=('Таблицы (*.xlsx)'))
 
         # Предобработка данных
@@ -60,17 +60,17 @@ class Vis(QMainWindow):
 
             # Подготавливаем данные для усложненных таблиц
             #MatPlotLib
-            statH=[]
-            if len(statH) > 0:
-                statH.clear()
+            stat_h=[]
+            if len(stat_h) > 0:
+                stat_h.clear()
             for i in names:
-                pre_statH = [int(i) for i in df_mp.iloc[names.index(i)] if type(i) is not str]
-                statH.append(pre_statH[1:])
+                pre_stat_h = [int(i) for i in df_mp.iloc[names.index(i)] if type(i) is not str]
+                stat_h.append(pre_stat_h[1:])
             #Seaborn
-            df_sns_H = pd.DataFrame(statH)
-            df_sns_H.columns = [i for i in period]
-            df_sns_H = df_sns_H.transpose()
-            df_sns_H.columns = [i for i in names]
+            df_sns_h = pd.DataFrame(stat_h)
+            df_sns_h.columns = [i for i in period]
+            df_sns_h = df_sns_h.transpose()
+            df_sns_h.columns = [i for i in names]
 
             # Выводим результаты построения упрощенного графика MatplotLib
             self.ui.t_mpl_s.setText(simple_mpl(period, norm_nums, stat))
@@ -86,26 +86,33 @@ class Vis(QMainWindow):
             self.resize(px_simple_sns.width(), px_simple_sns.height())
             self.ui.sns_g_s.setPixmap(px_simple_sns)
 
-            # # Выводим результаты построения упрощенного графика Plotly
-            # self.ui.t_ptl_s.setText(simple_ptl(period, norm_nums, stat))
-            # px_simple_ptl = QPixmap('simple_plots/simple_plt.png')
-            # self.ui.ptl_g_s.setScaledContents(True)
-            # self.resize(px_simple_ptl.width(), px_simple_ptl.height())
-            # self.ui.ptl_g_s.setPixmap(px_simple_ptl)
+            # Выводим результаты построения упрощенного графика Plotly
+            self.ui.t_ptl_s.setText(simple_ptl(period, norm_nums, stat))
+            px_simple_ptl = QPixmap('simple_plots/simple_plt.png')
+            self.ui.ptl_g_s.setScaledContents(True)
+            self.resize(px_simple_ptl.width(), px_simple_ptl.height())
+            self.ui.ptl_g_s.setPixmap(px_simple_ptl)
 
             # Выводим результаты построения усложненного графика MatplotLib
-            self.ui.t_mpl_h.setText(hard_mpl(period, statH))
+            self.ui.t_mpl_h.setText(hard_mpl(period, stat_h))
             px_comp_mpl = QPixmap('complicated_plots/compl_mpl.png')
             self.ui.mpl_g_h.setScaledContents(True)
             self.resize(px_comp_mpl.width(), px_comp_mpl.height())
             self.ui.mpl_g_h.setPixmap(px_comp_mpl)
 
             # Выводим результаты построения усложненного графика Seaborn
-            self.ui.t_sns_h.setText(hard_sns(df_sns_H))
+            self.ui.t_sns_h.setText(hard_sns(df_sns_h))
             px_comp_sns = QPixmap('complicated_plots/compl_sns.png')
             self.ui.sns_g_h.setScaledContents(True)
             self.resize(px_comp_sns.width(), px_comp_sns.height())
             self.ui.sns_g_h.setPixmap(px_comp_sns)
+
+            # Выводим результаты построения усложненного графика Plotly
+            self.ui.t_ptl_h.setText(hard_ptl(period, stat_h))
+            px_comp_ptl = QPixmap('complicated_plots/complicated_plt.png')
+            self.ui.ptl_g_h.setScaledContents(True)
+            self.resize(px_comp_ptl.width(), px_comp_ptl.height())
+            self.ui.ptl_g_h.setPixmap(px_comp_ptl)
 
 
 
