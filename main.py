@@ -2,7 +2,6 @@ from by_matplotlib import simple_mpl, hard_mpl
 from by_seaborn import simple_sns, hard_sns
 from by_plotly import simple_ptl, hard_ptl
 
-
 import sys
 import pandas as pd
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog

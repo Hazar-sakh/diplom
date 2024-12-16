@@ -1,7 +1,6 @@
 import os
 import plotly.graph_objs as go
 import datetime
-# from excel_reader import *
 
 
 # period - период для представления
