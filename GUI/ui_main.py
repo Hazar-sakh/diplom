@@ -25,7 +25,7 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QSize(1126, 900))
         MainWindow.setMaximumSize(QSize(1126, 900))
         icon = QIcon()
-        icon.addFile(u"icons8-graph-100.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile(u"Icons/icons8-graph-100.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(114, 0, 156, 255), stop:1 rgba(92, 255, 255, 255));\n"
 "font: 12pt \"Franklin Gothic\";")

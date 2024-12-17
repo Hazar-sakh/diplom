@@ -1,13 +1,13 @@
-from by_matplotlib import simple_mpl, hard_mpl
-from by_seaborn import simple_sns, hard_sns
-from by_plotly import simple_ptl, hard_ptl
+from Backend.by_matplotlib import simple_mpl, hard_mpl
+from Backend.by_seaborn import simple_sns, hard_sns
+from Backend.by_plotly import simple_ptl, hard_ptl
 
 import sys
 import pandas as pd
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PySide6.QtGui import QPixmap
 
-from ui_main import Ui_MainWindow
+from GUI.ui_main import Ui_MainWindow
 
 class Vis(QMainWindow):
 
@@ -73,48 +73,45 @@ class Vis(QMainWindow):
 
             # Выводим результаты построения упрощенного графика MatplotLib
             self.ui.t_mpl_s.setText(simple_mpl(period, norm_nums, stat))
-            px_simple_mpl = QPixmap('simple_mpl.png')
+            px_simple_mpl = QPixmap('simple_plots/simple_mpl.png')
             self.ui.mpl_g_s.setScaledContents(True)
             self.resize(px_simple_mpl.width(), px_simple_mpl.height())
             self.ui.mpl_g_s.setPixmap(px_simple_mpl)
 
             # Выводим результаты построения упрощенного графика Seaborn
             self.ui.t_sns_s.setText(simple_sns(df))
-            px_simple_sns = QPixmap('simple_sns.png')
+            px_simple_sns = QPixmap('simple_plots/simple_sns.png')
             self.ui.sns_g_s.setScaledContents(True)
             self.resize(px_simple_sns.width(), px_simple_sns.height())
             self.ui.sns_g_s.setPixmap(px_simple_sns)
 
             # Выводим результаты построения упрощенного графика Plotly
             self.ui.t_ptl_s.setText(simple_ptl(period, norm_nums, stat))
-            px_simple_ptl = QPixmap('simple_plt.png')
+            px_simple_ptl = QPixmap('simple_plots/simple_plt.png')
             self.ui.ptl_g_s.setScaledContents(True)
             self.resize(px_simple_ptl.width(), px_simple_ptl.height())
             self.ui.ptl_g_s.setPixmap(px_simple_ptl)
 
             # Выводим результаты построения усложненного графика MatplotLib
             self.ui.t_mpl_h.setText(hard_mpl(period, stat_h))
-            px_comp_mpl = QPixmap('compl_mpl.png')
+            px_comp_mpl = QPixmap('complicated_plots/compl_mpl.png')
             self.ui.mpl_g_h.setScaledContents(True)
             self.resize(px_comp_mpl.width(), px_comp_mpl.height())
             self.ui.mpl_g_h.setPixmap(px_comp_mpl)
 
             # Выводим результаты построения усложненного графика Seaborn
             self.ui.t_sns_h.setText(hard_sns(df_sns_h))
-            px_comp_sns = QPixmap('compl_sns.png')
+            px_comp_sns = QPixmap('complicated_plots/compl_sns.png')
             self.ui.sns_g_h.setScaledContents(True)
             self.resize(px_comp_sns.width(), px_comp_sns.height())
             self.ui.sns_g_h.setPixmap(px_comp_sns)
 
             # Выводим результаты построения усложненного графика Plotly
             self.ui.t_ptl_h.setText(hard_ptl(period, stat_h))
-            px_comp_ptl = QPixmap('complicated_plt.png')
+            px_comp_ptl = QPixmap('complicated_plots/complicated_plt.png')
             self.ui.ptl_g_h.setScaledContents(True)
             self.resize(px_comp_ptl.width(), px_comp_ptl.height())
             self.ui.ptl_g_h.setPixmap(px_comp_ptl)
-
-
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
