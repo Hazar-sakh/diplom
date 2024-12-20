@@ -2,30 +2,41 @@
 import sys # для работы с интерпретатором
 import pandas as pd # для работы с датафреймами и предобработкой данных
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog # для работы интерфейса
+from PySide6 import QtWidgets
 from PySide6.QtGui import QPixmap # для включения графиков в поля интерфейса
 
 # Импортируем функции построения графиков
-from Backend.by_matplotlib import simple_mpl, hard_mpl
-from Backend.by_seaborn import simple_sns, hard_sns
+from Backend.by_matplotlib import simple_mpl, hard_mpl, demo_mpl
+from Backend.by_seaborn import simple_sns, hard_sns, demo_sns
 from Backend.by_plotly import simple_ptl, hard_ptl
 
 # Задаем переменные, которые будут вызываться в разных функциях (глобальные)
 period = [] # список со значениями периодизации
 norm_name = str # наименование нормы
+norm_nums = [] # список значений нормы
 names = [] # список названий параметров
-df_mp = None # будущий датафрейм
+name = str # наименование параметра
+df_mp = None # будущий общий датафрейм
+df_sns_h = None # будущий датафрейм для sns
+stat = [] # список статистики выбранного значения
+stat_h = [] # список со значениями для усложненного графика
+demo_type = None # имя демонстрируемого вида графика
 
 
 # Импортируем интерфейс
 from GUI.ui_main import Ui_MainWindow
+from GUI.ui_demonstrator import Ui_Dialog
 # Создаем класс для реализации интерфейса, построения логики его работы и включения в него бэкэнда
-class Vis(QMainWindow):
-    # Создаем функцию инициализации по рекомендациям из документации к библиотеке PySide6
-    def __init__(self):
-        super(Vis, self).__init__()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
+class Vis(QMainWindow): # Создаем класс Vis и наследуемся от базового класса QMainWindow
+    def __init__(self): # Вызываем класс
+        super(Vis, self).__init__() # Определяем класс как суперкласс
+        self.ui_demo = None
+        self.demons = None
+        self.ui = Ui_MainWindow() # Создаем экземпляр класса UI_MainWindow
+        self.ui.setupUi(self) # и применяем его
         self.ui.browse.clicked.connect(self.browse_) # включаем обработчик события, запускающий функцию выбора файла и первичной предобработки
+        self.ui.show.clicked.connect(self.open_demons)  # включаем обработчик события, запускающий демонстратор графиков
+        self.ui.show.hide()
     # Реализуем функцию выбора файла для визуализации и его первичной предобработки
     def browse_(self):
         # Объявление переменных как глобальных и реализация диалогового окна выбора таблицы
@@ -60,7 +71,8 @@ class Vis(QMainWindow):
     # глобальной переменной и её значением, получаемым после предобработки
     # noinspection PyUnresolvedReferences
     def index_changed(self, i):
-            # Задаем имя параметра для представления
+            # Задаем список статистики выбранного значения как глобальную переменную имя параметра для представления
+            global stat, name, norm_nums, df_sns_h
             name = names[i]
 
             # Получаем список значений для представления по имени и норму
@@ -127,6 +139,53 @@ class Vis(QMainWindow):
             self.ui.ptl_g_h.setScaledContents(True) # Включаем масштабирование контента для поля в GUI
             self.resize(px_comp_ptl.width(), px_comp_ptl.height()) # Масштабируем график под выделенное поле GUI
             self.ui.ptl_g_h.setPixmap(px_comp_ptl) # Вставляем график в интерфейс
+
+            # Включаем показ кнопки демонстратора
+            self.ui.show.show()
+
+    def open_demons(self):
+        self.demons = QtWidgets.QDialog()
+        self.ui_demo = Ui_Dialog()
+        self.ui_demo.setupUi(self.demons)
+        self.demons.show()
+        self.ui_demo.choose_lib.currentIndexChanged.connect(self.demo_lib)
+
+    def demo_lib(self, lib):
+        global demo_type
+        demo_type = lib
+        d_mpl_list = ['Столбчатая', 'Круговая', 'С накоплением']
+        d_sns_list = ['Гистограмма', 'Свечи sns', 'Мощщный sns']
+        d_ptl_list = ['Круговой ptl', 'Свечи ptl', 'Мощщный ptl']
+        cs = self.ui_demo.choose_lib.currentText()
+        if cs == 'Matplotlib':
+            self.ui_demo.comboBox_2.clear()
+            for i in d_mpl_list:
+                self.ui_demo.comboBox_2.addItem(i)
+        elif cs == 'Seaborn':
+            self.ui_demo.comboBox_2.clear()
+            for i in d_sns_list:
+                self.ui_demo.comboBox_2.addItem(i)
+        elif cs == 'Plotly':
+            self.ui_demo.comboBox_2.clear()
+            for i in d_ptl_list:
+                self.ui_demo.comboBox_2.addItem(i)
+        self.ui_demo.comboBox_2.currentIndexChanged.connect(self.show_wow)
+
+    def show_wow(self, cs_type):
+        if demo_type == 0:
+            demo_mpl(cs_type, period, stat, name, norm_nums)
+        px_demo = QPixmap('demo_plot/demo.jpg')  # Определяем график как изображение для реализации в GUI
+        self.ui_demo.view.setScaledContents(True)  # Включаем масштабирование контента для поля в GUI
+        self.resize(px_demo.width(), px_demo.height())  # Масштабируем график под выделенное поле GUI
+        self.ui_demo.view.setPixmap(px_demo)  # Вставляем график в интерфейс
+
+        if demo_type == 1:
+            demo_sns(cs_type, df_mp, df_sns_h, name)
+        px_demo = QPixmap('demo_plot/demo.jpg')  # Определяем график как изображение для реализации в GUI
+        self.ui_demo.view.setScaledContents(True)  # Включаем масштабирование контента для поля в GUI
+        self.resize(px_demo.width(), px_demo.height())  # Масштабируем график под выделенное поле GUI
+        self.ui_demo.view.setPixmap(px_demo)  # Вставляем график в интерфейс
+
 
 # Инициируем работу программы в соответствии с рекомендациями библиотеки PySide6
 if __name__ == '__main__':

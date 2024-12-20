@@ -35,3 +35,13 @@ def hard_sns(df_sns_h):
     splt.savefig('complicated_plots/compl_sns.png') # Сохраняем график в виде изображения
     t_s2 = datetime.datetime.now() # Задаем время окончания работы функции
     return f'{t_s2 - t_s1}' # Возвращаем время работы функции
+
+def demo_sns(cs_type, df_mp, df_sns_h, name):
+    if os.path.exists('demo_plot/demo.jpg'):  # Определяем условие обновления файла графика
+        plt.clf()
+        plt.close()
+    if cs_type == 0:
+        sns.histplot(data=df_sns_h)
+    elif cs_type == 1:
+        sns.catplot(data=df_sns_h)
+    plt.savefig('demo_plot/demo.jpg')

@@ -2,6 +2,7 @@
 import os.path # Для проверки наличия файла графика
 import matplotlib.pyplot as plt # Для работы с графиком
 import datetime # Для измерения времени работы
+import numpy as np
 
 # V V V Создаем для удобства список глобальных переменных, которыми будем пользоваться
 # period - период для представления
@@ -36,3 +37,25 @@ def hard_mpl(period, stat_h):
     plt.savefig('complicated_plots/compl_mpl.png') # Сохраняем график в виде графического изображения
     t_mpl2 = datetime.datetime.now() # Задаем время окончания работы функции
     return f'{t_mpl2 - t_mpl1}' # Возвращаем время работы функции
+
+def demo_mpl(cs_type, period, stat, name, norm_nums):
+    if os.path.exists('demo_plot/demo.jpg'):  # Определяем условие обновления файла графика
+        plt.clf()
+        plt.close()
+    if cs_type == 0:
+        plt.bar(period, stat)
+        plt.xlabel('Период')
+        plt.ylabel('Количество')
+        plt.title(f'Столбчатая диаграмма\n({name})')
+    elif cs_type == 1:
+        plt.pie(stat, labels=period)
+        plt.title(f"Распределение по периодам\n({name})")
+    elif cs_type == 2:
+        x = period
+        ay = stat
+        by = norm_nums
+        y = np.vstack([ay, by])
+        fig, ax = plt.subplots()
+        ax.stackplot(x, y)
+        plt.title(f"С накоплением\n({name})")
+    plt.savefig('demo_plot/demo.jpg')  # Сохраняем график в виде изображения

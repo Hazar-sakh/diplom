@@ -5,3 +5,4 @@ seaborn~=0.13.2
 matplotlib~=3.9.3
 openpyxl~=3.1.5
 kaleido~=0.2.1 # Наличие установленного на ПК Google Chrome обязательно!
+numpy~=2.2.0
