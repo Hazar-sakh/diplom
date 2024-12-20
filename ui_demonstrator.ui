@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>720</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>720</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>720</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Демонстратор графиков</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>Icons/icons8-graph-100.png</normaloff>Icons/icons8-graph-100.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(114, 0, 156, 255), stop:1 rgba(92, 255, 255, 255));
+font: 12pt &quot;Franklin Gothic&quot;;</string>
+  </property>
+  <widget class="QComboBox" name="choose_lib">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>341</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QComboBox {
+background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 150));
+color: rgb(255, 255, 255);
+border-radius:7
+}
+
+QComboBox QAbstractItemView {
+background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 10), stop:1 rgba(0, 0, 71, 10));
+selection-background-color: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 10), stop:1 rgba(0, 0, 71, 10));
+color: rgb(255, 255, 255);
+border-radius:7
+}
+
+QScrollBar:vertical {
+background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));
+color: rgb(255, 255, 255);
+}
+
+
+</string>
+   </property>
+   <property name="editable">
+    <bool>false</bool>
+   </property>
+   <property name="currentText">
+    <string/>
+   </property>
+   <property name="currentIndex">
+    <number>-1</number>
+   </property>
+   <property name="placeholderText">
+    <string>Выберите библиотеку для визуализации</string>
+   </property>
+   <property name="duplicatesEnabled">
+    <bool>false</bool>
+   </property>
+   <item>
+    <property name="text">
+     <string>Matplotlib</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Seaborn</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Plotly</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="view">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>701</width>
+     <height>541</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 60), stop:1 rgba(0, 0, 71, 60));
+border-radius:7</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_2">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>10</y>
+     <width>341</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QComboBox {
+background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 150));
+color: rgb(255, 255, 255);
+border-radius:7
+}
+
+QComboBox QAbstractItemView {
+background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 10), stop:1 rgba(0, 0, 71, 10));
+selection-background-color: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 10), stop:1 rgba(0, 0, 71, 10));
+color: rgb(255, 255, 255);
+border-radius:7
+}
+
+QScrollBar:vertical {
+background: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.517, y2:1, stop:0 rgba(0, 83, 166, 102), stop:1 rgba(0, 0, 71, 255));
+color: rgb(255, 255, 255);
+}
+
+
+</string>
+   </property>
+   <property name="editable">
+    <bool>false</bool>
+   </property>
+   <property name="currentText">
+    <string/>
+   </property>
+   <property name="currentIndex">
+    <number>-1</number>
+   </property>
+   <property name="placeholderText">
+    <string>Выберите вид графика</string>
+   </property>
+   <property name="duplicatesEnabled">
+    <bool>false</bool>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
