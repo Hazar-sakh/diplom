@@ -8,7 +8,7 @@ from PySide6.QtGui import QPixmap # для включения графиков �
 # Импортируем функции построения графиков
 from Backend.by_matplotlib import simple_mpl, hard_mpl, demo_mpl
 from Backend.by_seaborn import simple_sns, hard_sns, demo_sns
-from Backend.by_plotly import simple_ptl, hard_ptl
+from Backend.by_plotly import simple_ptl, hard_ptl, demo_ptl
 
 # Задаем переменные, которые будут вызываться в разных функциях (глобальные)
 period = [] # список со значениями периодизации
@@ -92,6 +92,7 @@ class Vis(QMainWindow): # Создаем класс Vis и наследуемс�
             for i in names:
                 pre_stat_h = [int(i) for i in df_mp.iloc[names.index(i)] if type(i) is not str] # создаем предварительный список списков значений параметров
                 stat_h.append(pre_stat_h[1:]) # добавляем в список списков значений параметров список значений за вычетом нормы за ненадобностью
+
             #Seaborn
             df_sns_h = pd.DataFrame(stat_h) # Создаем датафрейм из списка списков значений параметров
             df_sns_h.columns = [i for i in period] # задаем заголовки колонн в виде значений периодизации
@@ -153,9 +154,9 @@ class Vis(QMainWindow): # Создаем класс Vis и наследуемс�
     def demo_lib(self, lib):
         global demo_type
         demo_type = lib
-        d_mpl_list = ['Столбчатая', 'Круговая', 'С накоплением']
-        d_sns_list = ['Гистограмма', 'Свечи sns', 'Мощщный sns']
-        d_ptl_list = ['Круговой ptl', 'Свечи ptl', 'Мощщный ptl']
+        d_mpl_list = ['Столбчатый', 'Круговой', 'С наложением']
+        d_sns_list = ['Столбчатый', 'Точечный', 'С предельными распределениями']
+        d_ptl_list = ['Столбчатый с наложением', 'Круговой', 'Интерактивный']
         cs = self.ui_demo.choose_lib.currentText()
         if cs == 'Matplotlib':
             self.ui_demo.comboBox_2.clear()
@@ -171,17 +172,15 @@ class Vis(QMainWindow): # Создаем класс Vis и наследуемс�
                 self.ui_demo.comboBox_2.addItem(i)
         self.ui_demo.comboBox_2.currentIndexChanged.connect(self.show_wow)
 
+    # noinspection PyUnresolvedReferences
     def show_wow(self, cs_type):
         if demo_type == 0:
             demo_mpl(cs_type, period, stat, name, norm_nums)
-        px_demo = QPixmap('demo_plot/demo.jpg')  # Определяем график как изображение для реализации в GUI
-        self.ui_demo.view.setScaledContents(True)  # Включаем масштабирование контента для поля в GUI
-        self.resize(px_demo.width(), px_demo.height())  # Масштабируем график под выделенное поле GUI
-        self.ui_demo.view.setPixmap(px_demo)  # Вставляем график в интерфейс
-
-        if demo_type == 1:
-            demo_sns(cs_type, df_mp, df_sns_h, name)
-        px_demo = QPixmap('demo_plot/demo.jpg')  # Определяем график как изображение для реализации в GUI
+        elif demo_type == 1:
+            demo_sns(cs_type, period, stat_h)
+        elif demo_type ==2:
+            demo_ptl(cs_type, period, stat_h, names)
+        px_demo = QPixmap('demo_plot/demo.png')  # Определяем график как изображение для реализации в GUI
         self.ui_demo.view.setScaledContents(True)  # Включаем масштабирование контента для поля в GUI
         self.resize(px_demo.width(), px_demo.height())  # Масштабируем график под выделенное поле GUI
         self.ui_demo.view.setPixmap(px_demo)  # Вставляем график в интерфейс

@@ -1,5 +1,4 @@
 # Импортируем необходимые библиотеки для работы
-import os.path # Для проверки наличия файла графика
 import seaborn as sns # Для создания графика
 import matplotlib.pyplot as plt # Для работы с графиком (ввиду зависимости Seaborn от Matplotlib)
 import datetime # Для измерения времени работы
@@ -17,31 +16,42 @@ import datetime # Для измерения времени работы
 # Строим простейший график в функцию которого передаем датафрейм
 def simple_sns(df):
     t_s1 = datetime.datetime.now() # Задаем время начала работы функции
-    if os.path.exists('simple_plots/simple_sns.png'): # Определяем условие обновления файла графика
-        plt.clf()
-        plt.close()
     splt = sns.relplot(data=df, kind='line') # Создаем график из датафрейма
     splt.savefig('simple_plots/simple_sns.png') # Сохраняем график в виде изображения
     t_s2 = datetime.datetime.now() # Задаем время окончания работы функции
+    plt.clf()
+    plt.close()
     return f'{t_s2 - t_s1}' # Возвращаем время работы функции
 
 # Строим усложненный график
 def hard_sns(df_sns_h):
     t_s1 = datetime.datetime.now() # Задаем время начала работы функции
-    if os.path.exists('complicated_plots/compl_sns.png'): # Определяем условие обновления файла графика
-        plt.clf()
-        plt.close()
     splt = sns.relplot(data=df_sns_h, kind='line') # Создаем график из датафрейма
     splt.savefig('complicated_plots/compl_sns.png') # Сохраняем график в виде изображения
     t_s2 = datetime.datetime.now() # Задаем время окончания работы функции
+    plt.clf() # Очищаем график
+    plt.close() # Закрываем график
     return f'{t_s2 - t_s1}' # Возвращаем время работы функции
 
-def demo_sns(cs_type, df_mp, df_sns_h, name):
-    if os.path.exists('demo_plot/demo.jpg'):  # Определяем условие обновления файла графика
-        plt.clf()
-        plt.close()
+def demo_sns(cs_type, period, stat_h):
+    plt.figure(figsize=(10,7), dpi=300)
     if cs_type == 0:
-        sns.histplot(data=df_sns_h)
+        for i in stat_h:
+            sns.barplot(x=period, y=i)
+        plt.title('Столбчатый график')
     elif cs_type == 1:
-        sns.catplot(data=df_sns_h)
-    plt.savefig('demo_plot/demo.jpg')
+        for i in stat_h:
+            sns.scatterplot(x=period, y=i, markers='o')
+        plt.title('Точечный график')
+    elif cs_type == 2:
+        for i in stat_h:
+            sns.scatterplot(x=period, y=i, markers='o')
+            sns.rugplot(x=period, y=i)
+            plt.xlim(-1)
+            plt.ylim(-5)
+        plt.title('Точечный с предельными распределениями')
+    plt.xlabel('Год')
+    plt.ylabel('Статистика')
+    plt.savefig('demo_plot/demo.png')
+    plt.clf()
+    plt.close()
