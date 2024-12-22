@@ -20,8 +20,7 @@ def simple_mpl(period, norm_nums, stat):
     plt.plot(period, norm_nums) # Добавляем линию нормы
     plt.savefig('simple_plots/simple_mpl.png') # Сохраняем график в виде изображения
     t_mpl2 = datetime.datetime.now() # Задаем время окончания работы функции
-    plt.clf()
-    plt.close()
+    plt.close() # Закрываем график с освобождением ресурсов
     return f'{t_mpl2 - t_mpl1}' # Возвращаем время работы функции
 
 # Строим усложненный график в функцию которого передаем значения периода и статистики
@@ -31,28 +30,26 @@ def hard_mpl(period, stat_h):
         plt.plot(period, i)
     plt.savefig('complicated_plots/compl_mpl.png') # Сохраняем график в виде графического изображения
     t_mpl2 = datetime.datetime.now() # Задаем время окончания работы функции
-    plt.clf()
-    plt.close()
+    plt.close() # Закрываем график с освобождением ресурсов
     return f'{t_mpl2 - t_mpl1}' # Возвращаем время работы функции
 
 def demo_mpl(cs_type, period, stat, name, norm_nums):
-    plt.figure(dpi=300)
-    if cs_type == 0:
-        plt.bar(period, stat)
-        plt.xlabel('Период')
-        plt.ylabel('Количество')
-        plt.title(f'Столбчатый график\n({name})')
-    elif cs_type == 1:
-        plt.pie(stat, labels=period)
-        plt.title(f"Распределение по периодам\n({name})")
-    elif cs_type == 2:
-        x = period
-        ay = stat
-        by = norm_nums
-        y = np.vstack([ay, by])
+    plt.figure(dpi=300) # Определяем качество графика
+    if cs_type == 0: # Задаем условие, при котором строится именно этот вид графика
+        plt.bar(period, stat) # Строим график из значений переданных переменных
+        plt.xlabel('Период') # Задаем наименование оси Х
+        plt.ylabel('Количество') # Задаем наименование оси У
+        plt.title(f'Столбчатый график\n({name})') # Задаем название графика
+    elif cs_type == 1: # Задаем условие, при котором строится именно этот вид графика
+        plt.pie(stat, labels=period) # Строим график из значений переданных переменных
+        plt.title(f"Распределение по периодам\n({name})") # Задаем название графика
+    elif cs_type == 2: # Задаем условие, при котором строится именно этот вид графика
+        x = period # Задаем значения для оси Х
+        ay = stat  # Задаем значения статистики для оси У
+        by = norm_nums # Задаем значения нормирования для оси У
+        y = np.vstack([ay, by]) # Собираем оси У в стэк (объединяем между собой для наложения)
         fig, ax = plt.subplots()
-        ax.stackplot(x, y)
-        plt.title(f"С наложением\n({name})")
+        ax.stackplot(x, y) # Создаем таблицу с наложением
+        plt.title(f"С наложением\n({name})") # Задаем название графика
     plt.savefig('demo_plot/demo.png')  # Сохраняем график в виде изображения
-    plt.clf()
-    plt.close()
+    plt.close() # Закрываем график с освобождением ресурсов

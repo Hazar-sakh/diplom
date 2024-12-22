@@ -19,7 +19,6 @@ def simple_sns(df):
     splt = sns.relplot(data=df, kind='line') # Создаем график из датафрейма
     splt.savefig('simple_plots/simple_sns.png') # Сохраняем график в виде изображения
     t_s2 = datetime.datetime.now() # Задаем время окончания работы функции
-    plt.clf()
     plt.close()
     return f'{t_s2 - t_s1}' # Возвращаем время работы функции
 
@@ -29,29 +28,27 @@ def hard_sns(df_sns_h):
     splt = sns.relplot(data=df_sns_h, kind='line') # Создаем график из датафрейма
     splt.savefig('complicated_plots/compl_sns.png') # Сохраняем график в виде изображения
     t_s2 = datetime.datetime.now() # Задаем время окончания работы функции
-    plt.clf() # Очищаем график
     plt.close() # Закрываем график
     return f'{t_s2 - t_s1}' # Возвращаем время работы функции
 
 def demo_sns(cs_type, period, stat_h):
-    plt.figure(figsize=(10,7), dpi=300)
-    if cs_type == 0:
-        for i in stat_h:
+    plt.figure(figsize=(10,7), dpi=300) #
+    if cs_type == 0: # Задаем условие, при котором строится именно этот вид графика
+        for i in stat_h: # Строим график для каждого параметра массива в заданном периоде
             sns.barplot(x=period, y=i)
-        plt.title('Столбчатый график')
-    elif cs_type == 1:
-        for i in stat_h:
-            sns.scatterplot(x=period, y=i, markers='o')
-        plt.title('Точечный график')
-    elif cs_type == 2:
-        for i in stat_h:
-            sns.scatterplot(x=period, y=i, markers='o')
-            sns.rugplot(x=period, y=i)
-            plt.xlim(-1)
-            plt.ylim(-5)
-        plt.title('Точечный с предельными распределениями')
-    plt.xlabel('Год')
-    plt.ylabel('Статистика')
-    plt.savefig('demo_plot/demo.png')
-    plt.clf()
-    plt.close()
+        plt.title('Столбчатый график') # Задаем имя графика
+    elif cs_type == 1: # Задаем условие, при котором строится именно этот вид графика
+        for i in stat_h: # Строим график для каждого параметра массива в заданном периоде
+            sns.scatterplot(x=period, y=i, markers='o') # дополнительно задаем тип маркеров
+        plt.title('Точечный график') # Задаем имя графика
+    elif cs_type == 2: # Задаем условие, при котором строится именно этот вид графика
+        for i in stat_h: # Строим график для каждого параметра массива в заданном периоде
+            sns.scatterplot(x=period, y=i, markers='o') # дополнительно задаем тип маркеров
+            sns.rugplot(x=period, y=i) # определяем линии предельного распределения
+            plt.xlim(-1) # задаем предел для X
+            plt.ylim(-5) # задаем предел для Y
+        plt.title('Точечный с предельными распределениями') # Задаем имя графика
+    plt.xlabel('Год') # Задаем название оси X
+    plt.ylabel('Статистика') # Задаем название оси Y
+    plt.savefig('demo_plot/demo.png') # Сохраняем график
+    plt.close() # Закрываем график с высвобождением ресурсов

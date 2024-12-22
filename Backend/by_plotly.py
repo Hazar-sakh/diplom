@@ -1,6 +1,5 @@
 # Импортируем необходимые библиотеки для работы
 import os.path # Для проверки наличия файла графика
-
 import plotly.graph_objs as go # Для работы с графиком
 import datetime # Для измерения времени работы
 
@@ -46,23 +45,23 @@ def hard_ptl(period, stat_h):
 
 
 def demo_ptl(cs_type, period, stat_h, names):
-    fig = go.Figure()
-    if cs_type == 0:
-        for i in stat_h:
+    fig = go.Figure() # Определяем переменную графика
+    if cs_type == 0: # Задаем условие, при котором строится именно этот вид графика
+        for i in stat_h: # Строим график из первых трех параметров переданного набора данных
             if stat_h.index(i) <= 2:
                 fig.add_trace(go.Bar(x=period, y=i, name=f'Показатель {stat_h.index(i)}'))
-        fig.update_layout(title='Столбчатый с наложением', barmode='stack')
-    if cs_type == 1:
-        fig.add_trace(go.Pie(values=stat_h[0], labels=period, hole=0.8))
+        fig.update_layout(title='Столбчатый с наложением', barmode='stack') # Задаем название и определяем наложение
+    if cs_type == 1: # Задаем условие, при котором строится именно этот вид графика
+        fig.add_trace(go.Pie(values=stat_h[0], labels=period, hole=0.8)) # Строим график из первого парамера
         fig.update_layout(title=f'Круговая \n({names[0]})', barmode='stack',
                           annotations=[dict(text=f'Выдано за все время {sum(stat_h[0])}', x=0.5, y=0.5, font_size=16,
-                                            showarrow=False)])
-    if cs_type == 2:
-        for i in stat_h:
+                                            showarrow=False)]) # определяем настройки легенды
+    if cs_type == 2: # Задаем условие, при котором строится именно этот вид графика
+        for i in stat_h: # Строим график из первых трех параметров переданного набора данных
             if stat_h.index(i) <= 2:
                 fig.add_trace(go.Scatter(x=period, y=i, name=f'Показатель {stat_h.index(i)}', mode='lines+markers',
                                          marker=dict(symbol='diamond')))
-        fig.update_layout(title='Интерактивный')
-        fig.show()
+        fig.update_layout(title='Интерактивный') # Задаем название графика
+        fig.show() # Вызываем демонстрацию интерактивного графика в браузере
     name = 'demo'  # Задаем имя графика
     fig.write_image(f'demo_plot/{name}.png')  # Сохраняем график в виде изображения
